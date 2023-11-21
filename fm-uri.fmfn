@@ -1,0 +1,102 @@
+Let ([
+  // scheme
+  _list = Substitute ( url ; "://" ; "¶" ) ;
+  _scheme = GetValue ( _list ; 1 ) ;
+
+  // userinfo
+  _rest = GetValue ( _list ; 2 ) ;
+  _list = Substitute ( _rest ; "@" ; "¶" ) ;
+  _hasUserInfo = GetAsBoolean ( PatternCount ( _rest ; "@" ) );
+  _userInfo = Case ( _hasUserInfo ; GetValue ( _list ; 1 ) ; "" ) ;
+
+  // username & password
+  _rest = Case ( _hasUserInfo ; GetValue ( _list ; 2 ) ; _rest ) ;
+  _list = Substitute ( _userInfo ; ":" ; "¶" ) ;
+  _username = Case ( _hasUserInfo ; GetValue ( _list ; 1 ) ; "" ) ;
+  _password = Case ( _hasUserInfo ; GetValue ( _list ; 2 ) ; "" ) ;
+
+  // host
+  _list = Substitute ( _rest ; [ "/" ; "¶" ] ; [ "?" ; "¶" ] ; [ "#" ; "¶" ] ) ;
+  _host = GetValue ( _list ; 1 ) ;
+
+  // hostname & port
+  _hasPort = GetAsBoolean ( PatternCount ( _host ; ":" ) ) ;
+  _list = Substitute ( _host ; ":" ; "¶" ) ;
+  _hostname = GetValue ( _list ; 1 ) ;
+  _port = Case ( _hasPort ; GetValue ( _list ; 2 ) ; _scheme = "http" ; "80" ; _scheme = "https" ; "443" ; "" ) ;
+
+  // subdomain, domain & tld
+  _list = Substitute ( _hostname ; "." ; "¶" ) ;
+  _tld = GetValue ( _list ; ValueCount ( _list ) ) ;
+  _domain = GetValue ( _list ; ValueCount ( _list ) - 1 ) & "." & _tld ;
+  _subdomain = Substitute ( _hostname ; [ "." & _domain ; "" ] ; [ _domain ; "" ] ) ;
+  _rest = Substitute ( _rest ; [ _host & "/" ; "" ] ; [ _host & "?" ; "" ] ; [ _host & "#" ; "" ] ; [ _host ; "" ] ) ;
+
+  // origin & authority
+  _authority = Case ( _hasUserInfo ; _userInfo & "@" & _host ; _host ) ;
+  _origin = _scheme & "://" & _authority ;
+
+  // fragment
+  _hasFragment = GetAsBoolean ( PatternCount ( _rest ; "#" ) ) ;
+  _list = Substitute ( _rest ; "#" ; "¶" ) ;
+  _rest = GetValue ( _list ; 1 ) ;
+  _fragment = Case ( _hasFragment ; GetValue ( _list ; 2 ) ; "" ) ;
+
+  // query
+  _hasQuery = GetAsBoolean ( PatternCount ( _rest ; "?" ) ) ;
+  _list = Substitute ( _rest ; "?" ; "¶" ) ;
+  _rest = GetValue ( _list ; 1 ) ;
+  _query = Case ( _hasQuery ; GetValue ( _list ; 2 ) ; "" ) ;
+
+  // pathname
+  _pathname = "/" & _rest ;
+
+  // resource
+  _resource = _pathname & Case ( _hasQuery ; "?" & _query ) & Case ( _hasFragment ; "#" & _fragment ) ;
+
+  // suffix & filename
+  _hasFilename = GetAsBoolean ( PatternCount ( _rest ; "." ) ) ;
+  _list = Substitute ( _rest ; [ "." ; "¶" ] ; [ "/" ; "¶" ] ) ;
+  _suffix = Case ( _hasFilename ; GetValue ( _list ; ValueCount ( _list ) ) ; "" ) ;
+  _filename = Case ( _hasFilename ; GetValue ( _list ; ValueCount ( _list ) - 1 ) & "." & _suffix ; "" ) ;
+
+  // directory
+  _directory = Substitute ( _pathname ; _filename ; "" ) ;
+  _directory = Left ( _directory ; Length ( _directory ) - 1 ) ;
+
+  // json
+  _json = JSONSetElement (
+    "{}" ;
+    [ "origin" ; _origin ; JSONString ] ;
+    [ "authority" ; _authority ; JSONString ] ;
+    [ "scheme" ; _scheme ; JSONString ] ;
+    [ "protocol" ; _scheme ; JSONString ] ;
+    [ "userinfo" ; _userInfo ; JSONString ] ;
+    [ "username" ; _username ; JSONString ] ;
+    [ "password" ; _password ; JSONString ] ;
+    [ "host" ; _host ; JSONString ] ;
+    [ "hostname" ; _hostname ; JSONString ] ;
+    [ "port" ; _port ; JSONString ] ;
+    [ "subdomain" ; _subdomain ; JSONString ] ;
+    [ "domain" ; _domain ; JSONString ] ;
+    [ "tld" ; _tld ; JSONString ] ;
+    [ "resource" ; _resource ; JSONString ] ;
+    [ "pathname" ; _pathname ; JSONString ] ;
+    [ "path" ; _pathname ; JSONString ] ;
+    [ "directory" ; _directory ; JSONString ] ;
+    [ "filename" ; _filename ; JSONString ] ;
+    [ "suffix" ; _suffix ; JSONString ] ;
+    [ "query" ; _query ; JSONString ] ;
+    [ "search" ; "?" & _query ; JSONString ] ;
+    [ "fragment" ; _fragment ; JSONString ] ;
+    [ "hash" ; "#" & _fragment ; JSONString ]
+  )
+
+ ] ;
+
+ Case (
+  IsEmpty ( key ) or IsEmpty ( url ) ;
+    "" ;
+  JSONGetElement ( _json ; key )
+ )
+)
