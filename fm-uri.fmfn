@@ -23,7 +23,8 @@ Let ([
       "**query**" ;
       "**search**" ;
       "**fragment**" ;
-      "**hash**"
+      "**hash**" ;
+      "**all**"
   ) ;
 
   // scheme
@@ -126,8 +127,10 @@ Let ([
     "Missing key property" ;
   IsEmpty ( url ) ;
     "Missing url property" ;
-  PatternCount ( _validKeys ; "**" & key & "**" ) <= 0 ;
+  PatternCount ( _validKeys ; "**" & Lower ( key ) & "**" ) <= 0 ;
     "Invalid key property";
+  Upper ( key ) = "ALL" ;
+    _json ;
   JSONGetElement ( _json ; key )
  )
 )
