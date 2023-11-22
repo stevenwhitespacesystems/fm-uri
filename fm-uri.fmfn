@@ -1,4 +1,31 @@
 Let ([
+  // Validation of keys
+  _validKeys = List (
+      "**origin**" ;
+      "**authority**" ;
+      "**scheme**" ;
+      "**protocol**" ;
+      "**userinfo**" ;
+      "**username**" ;
+      "**password**" ;
+      "**host**" ;
+      "**hostname**" ;
+      "**port**" ;
+      "**subdomain**" ;
+      "**domain**" ;
+      "**tld**" ;
+      "**resource**" ;
+      "**pathname**" ;
+      "**path**" ;
+      "**directory**" ;
+      "**filename**" ;
+      "**suffix**" ;
+      "**query**" ;
+      "**search**" ;
+      "**fragment**" ;
+      "**hash**"
+  ) ;
+
   // scheme
   _list = Substitute ( url ; "://" ; "¶" ) ;
   _scheme = GetValue ( _list ; 1 ) ;
@@ -95,8 +122,12 @@ Let ([
  ] ;
 
  Case (
-  IsEmpty ( key ) or IsEmpty ( url ) ;
-    "" ;
+  IsEmpty ( key ) ;
+    "Missing key property" ;
+  IsEmpty ( url ) ;
+    "Missing url property" ;
+  PatternCount ( _validKeys ; "**" & key & "**" ) <= 0 ;
+    "Invalid key property";
   JSONGetElement ( _json ; key )
  )
 )
