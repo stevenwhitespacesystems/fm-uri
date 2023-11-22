@@ -18,6 +18,7 @@
 </p>
 
 <!-- PROJECT SHIELDS -->
+
 ![FileMaker Version][filemaker-shield]
 ![FileMaker Platform][platform-shield]
 ![Commit Shield][commit-shield]
@@ -27,29 +28,50 @@
 [![LinkedId][linkedin-shield]][linkedin-url]
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Features](#features)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-    * [Version](#version)
-    * [Custom Functions](#custom-functions)
-    * [Limitations](#limitations)
-* [Usage](#usage)
-  * [Installation](#installation)
-  * [Quick Start](#quick-start)
-  * [Sample Conversions](#sample-conversions)
-  * [Parameters](#parameters)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-* [fmapi Product Suite](#fmapi-product-suite)
-  * [fmapi Apps](#fmapi-apps)
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li>
+          <a href="#prerequisites">Prerequisites</a>
+          <ul>
+            <li><a href="#version">Version</a></li>
+            <li><a href="#custom-functions">Custom Functions</a></li>
+            <li><a href="#limitations">Limitations</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
+        <ul>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#quick-start">Quick Start</a></li>
+          <li><a href="#sample-conversions">Sample Conversions</a></li>
+          <li><a href="#parameters">Parameters</a></li>
+        </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 **fm-uri** is a small Claris/FileMaker custom function that takes a url, breaks it up into component parts and returns this to the user.
@@ -57,183 +79,140 @@
 We found more and more need for a function like this as we expose Claris/FileMaker to AWS and REST API's in general.
 
 ### Built With
-* [Claris Pro](https://www.claris.com/pro/)
-* No 3rd party plugins.
+
+- [Claris Pro](https://www.claris.com/pro/)
+- No 3rd party plugins.
 
 <!-- FEATURES -->
+
 ## Features
 
-* **TODO**:
-
-<pre class="ascii-art">              <a href="docs.html#accessors-origin">origin</a>
-<span class="line">       __________|__________
-      /                     \
-</span>                         <a href="docs.html#accessors-authority">authority</a>
-<span class="line">     |             __________|_________
-     |            /                    \
-</span>              <a href="docs.html#accessors-userinfo">userinfo</a>                <a href="docs.html#accessors-host">host</a>                          <a href="docs.html#accessors-resource">resource</a>
-<span class="line">     |         __|___                ___|___                 __________|___________
-     |        /      \              /       \               /                      \
-</span>         <a href="docs.html#accessors-username">username</a>  <a href="docs.html#accessors-password">password</a>     <a href="docs.html#accessors-hostname">hostname</a>    <a href="docs.html#accessors-port">port</a>     <a href="docs.html#accessors-pathname">path</a> &amp; <a href="docs.html#accessors-segment">segment</a>      <a href="docs.html#accessors-search">query</a>   <a href="docs.html#accessors-hash">fragment</a>
-<span class="line">     |     __|___   __|__    ______|______   |   __________|_________   ____|____   |
-     |    /      \ /     \  /             \ / \ /                    \ /         \ / \
-</span>    foo://username:password@www.example.com:123/hello/world/there.html?name=ferret#foo
-<span class="line">    \_/                     \ / \       \ /    \__________/ \     \__/
-     |                       |   \       |           |       \      |
-</span>  <a href="docs.html#accessors-protocol">scheme</a>               <a href="docs.html#accessors-subdomain">subdomain</a>  <span class="line">\</span>     <a href="docs.html#accessors-tld">tld</a>      <a href="docs.html#accessors-directory">directory</a>    <span class="line">\</span>   <a href="docs.html#accessors-suffix">suffix</a>
-<span class="line">                                   \____/                      \___/
-                                      |                          |
-</span>                                    <a href="docs.html#accessors-domain">domain</a>                   <a href="docs.html#accessors-filename">filename</a>
-
-</pre>
+- **Simple to use**: The custom function takes a url and a key and provides this part of the url for use.
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 ### Prerequisites
 
 #### Version
 
-The FileMaker script makes use of the [JSON Functions](https://fmhelp.filemaker.com/help/16/fmp/en/index.html#page/FMP_Help/json-functions.html) introduced in FileMaker 16.
+The Claris/FileMaker custom function makes use of the [JSON Functions](https://fmhelp.filemaker.com/help/16/fmp/en/index.html#page/FMP_Help/json-functions.html) introduced in FileMaker 16.
 
-This means that this script will only work with **FileMaker 16+** products.
+This means that this custom function will only work with **FileMaker 16+** products.
 
-Using the script with anything less than 16 will have unexpected behaviour.
-
-#### Custom Functions
-
-We make use of the #Name-Value custom function provided by [filemakerstandards](https://github.com/filemakerstandards/fmpstandards/tree/master/Functions/%23Name-Value).
-
-Please copy the following Custom Functions to your solution before copying the script:
-- [# ( name ; value )](https://raw.githubusercontent.com/filemakerstandards/fmpstandards/master/Functions/%23Name-Value/%23.fmfn)
-- [#Assign ( parameters )](https://raw.githubusercontent.com/filemakerstandards/fmpstandards/master/Functions/%23Name-Value/%23Assign.fmfn)
+Using the custom function with anything less than 16 will have unexpected behaviour.
 
 #### Limitations
 
-##### Large XML Data
+##### Query String
 
-FileMaker Pro is not the most efficient tool for text parsing. This script was designed primarily for small XML packets sent back from APIs. It wasn't designed, in mind, to convert large XML files into JSON.
-
-However, if given enough time, this script will convert large XML files into JSON and has been optimised to the best of our ability.
-
-Unfortunately, FileMaker can only go so far before it starts to fall over.
-
-We've performed some benchmark tests to give you an idea of how long it takes the script to execute.
-
-XML Size (KB) | Execution Time (ms) | Readable Time
-------------- | ------------------- | -------------
-4 | 958 | 0.9s
-8 | 1644 | 1.6s
-17 | 3430 | 3.4s
-35 | 8767 | 8.7s
-71 | 26435 | 26.4s
-142 | 87973 | 1min 27.9s
-283 | 314285 | 5mins 14.3s
-
-*KB was determined using FileMaker's `Length ( field )` function.*
-
-*Benchmark tests where performed using the #( "compact" ; True ) option and run as a server script with a 4Ghz Quad core CPU. Your experience may vary depending on if you run the script over WAN, LAN or server architecture*
-
-As stated above, this script wasn't developed with the purpose of taking large XML data and converting it to JSON.
-
-If you do have this need, we **strongly** suggest using a plugin or performing the conversion outside of FileMaker and then importing the result back into FileMaker.
-
-##### FileMaker Text Parsing Functions
-
-We have built the rules for identifying XML nodes in FileMaker using all the Text Functions available to us and from our testing it has handled all the testing XML data thrown at it.
-
-However, there may be some fringe cases where this breaks down. If you discover such a case, please create a [Bug Report](https://github.com/stevenwhitespacesystems/fm-uri/issues) and we'll see if we can correct it. Unfortunately, there may be cases that can't be solved.
+TODO:
 
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 ### Installation
 
-1. Make sure that the [Custom Functions](#custom-functions) have been added to your solution.
-2. Copy the `fm-xml2json` script to your solution.
+1. Copy the code from the [fm-uri.fmfn](https://raw.githubusercontent.com/stevenwhitespacesystems/fm-uri/main/fm-uri.fmfn) file directly into the custom function area of your Claris/FileMaker file.
 
 ### Quick Start
 
-There are 2 fmp12 files provided here
+There is 1 fmp12 files provided here
 
-1. fm-xml2json.fmp12
-2. fm-xml2json-tests.fmp12
+1. fm-uri.fmp12
 
-`fm-xml2json.fmp12` file contains the script and custom function that you need to copy over.
-  
-`fm-xml2json-tests.fmp12` file contains our test suite to confirm that the script behaves as intended.
+`fm-uri.fmp12` file contains the custom function and the test suite used to confirm the function behaves correctly.
 
-If you open the `fm-xml2json` file, you can paste in some xml and convert it to a json object by pressing the Convert button.
+If you open the `fm-uri.fmp12` file, you can open up the Data Viewer and test the custom function straight away.
 
-### Sample Conversions
+### Understanding the different URL parts
 
-| XML | JS/JSON compact | JS/JSON non-compact |
-|:----|:----------------|:--------------------|
-| `<a/>` | `{"a":{}}` | `{"elements":[{"name":"a","type":"element"}]}` |
-| `<a/><b/>` | `{"a":{},"b":{}}` | `{"elements":[{"name":"a","type":"element"},{"name":"b","type":"element"}]}` |
-| `<a><b/></a>` | `{"a":{"b":{}}}` | `{"elements":[{"elements":[{"name":"b","type":"element"}],"name":"a","type":"element"}]}` |
-| `<a> Hi </a>` | `{"a":{"_text":" Hi "}}` | `{"elements":[{"elements":[{"text":" Hi ","type":"text"}],"name":"a","type":"element"}]}` |
-| `<a x="1.234" y="It's"/>` | `{"a":{"_attributes":{"x":"1.234","y":"It's"}}}` | `{"elements":[{"attributes":{"x":"1.234","y":"It's"},"name":"a","type":"element"}]}` |
-| `<?xml?>` | `{"_declaration":{}}` | `{"declaration":{},"elements":[]}` |
-| `<?go there?>` | `{"_instruction":{"go":"there"}}` | `{"elements":[{"instruction":"there","name":"go","type":"instruction"}]}` |
-| `<?xml version="1.0" encoding="utf-8"?>` | `{"_declaration":{"_attributes":{"version":"1.0","encoding":"utf-8"}}}` | `{"declaration":{"attributes":{"encoding":"utf-8","version":"1.0"}},"elements":[]}` |
-| `<!--Hello, World!-->` | `{"_comment":"Hello, World!"}` | `{"elements":[{"comment":"Hello, World!","type":"comment"}]}` |
-| `<![CDATA[<foo></bar>]]>` | `{"_cdata":"<foo></bar>"}` | `{"elements":[{"cdata":"<foo></bar>","type":"cdata"}]}` |
+Below is a representation of how we break up the url
 
-### Parameters
+<pre class="ascii-art">              <a href="docs.html#accessors-origin">origin</a>
+<span class="line">       __________|__________
+      /                     \
+</span>                         <a href="#authority">authority</a>
+<span class="line">     |             __________|_________
+     |            /                    \
+</span>              <a href="#userinfo">userinfo</a>                <a href="#host">host</a>                          <a href="docs.html#accessors-resource">resource</a>
+<span class="line">     |         __|___                ___|___                 __________|___________
+     |        /      \              /       \               /                      \
+</span>         <a href="#username">username</a>  <a href="#password">password</a>     <a href="#hostname">hostname</a>    <a href="#port">port</a>     <a href="docs.html#accessors-pathname">path</a> &amp; <a href="docs.html#accessors-segment">segment</a>      <a href="docs.html#accessors-search">query</a>   <a href="docs.html#accessors-hash">fragment</a>
+<span class="line">     |     __|___   __|__    ______|______   |   __________|_________   ____|____   |
+     |    /      \ /     \  /             \ / \ /                    \ /         \ / \
+</span>    foo://username:password@www.example.com:123/hello/world/there.html?name=ferret#foo
+<span class="line">    \_/                     \ / \       \ /    \__________/ \     \__/
+     |                       |   \       |           |       \      |
+</span>  <a href="#scheme">scheme</a>               <a href="docs.html#accessors-subdomain">subdomain</a>  <span class="line">\</span>     <a href="docs.html#accessors-tld">tld</a>      <a href="docs.html#accessors-directory">directory</a>    <span class="line">\</span>   <a href="docs.html#accessors-suffix">suffix</a>
+<span class="line">                                   \____/                      \___/
+                                      |                          |
+</span>                                    <a href="docs.html#accessors-domain">domain</a>                   <a href="docs.html#accessors-filename">filename</a>
 
-The below parameters can be used as `# ( name ; value )` parameters for the script.
+</pre>
 
-| `name`              | Default `value` | Description |
-|:--------------------|:--------|:------------|
-| `compact`           | `false` | Whether to produce detailed object or compact object. |
-| `ignore_declaration` | `false` | Whether to ignore parsing declaration property. That is, no `declaration` property will be generated. |
-| `ignore_instruction` | `false` | Whether to ignore parsing processing instruction property. That is, no `instruction` property will be generated. |
-| `ignore_attributes`  | `false` | Whether to ignore parsing attributes of elements.That is, no `attributes` property will be generated. |
-| `ignore_comment`     | `false` | Whether to ignore parsing comments of the elements. That is, no `comment` will be generated. |
-| `ignore_cdata`       | `false` | Whether to ignore parsing CDATA of the elements. That is, no `cdata` will be generated. |
-| `ignore_doctype`     | `false` | Whether to ignore parsing Doctype of the elements. That is, no `doctype` will be generated. |
-| `ignore_text`        | `false` | Whether to ignore parsing texts of the elements. That is, no `text` will be generated. |
+### Keys
 
-The below parameters are under consideration but currently **NOT** in the script.
+Here are the list of keys that can be used in the key property of the custom function.
 
-| `name`              | Default `value` | Description |
-|:--------------------|:--------|:------------|
-| `nativeType`        | `false` | Whether to attempt converting text of numerals or of boolean values to native type. For example, `"123"` will be `123` and `"true"` will be `true` |
-| `nativeTypeAttributes` | `false` | Whether to attempt converting attributes of numerals or of boolean values to native type. See also `nativeType` above. |
-| `addParent`         | `false` | Whether to add `parent` property in each element object that points to parent object. |
+#### scheme
+> `protocol` can also be used and is an alias of `scheme`
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "scheme" ) // returns "http"
 
-#### Options for Changing Key Names
+fmUri ( "http://example.org/foo/hello.html" ; "protocol" ) // returns "http"
+```
 
-To change default key names in the output object, use the following parameters:
+#### username
 
-| `name`              | Default `value` | Description |
-|:--------------------|:--------|:------------|
-| `declaration_key`    | `"declaration"` or `"_declaration"` | Name of the property key which will be used for the declaration. For example, if `# ( "declaration_key" ; "$declaration" )` then output of `<?xml?>` will be `{"$declaration":{}}` *(in compact form)* |
-| `instruction_key`    | `"instruction"` or `"_instruction"` | Name of the property key which will be used for the processing instruction. For example, if `# ( "instruction_key" ; "$instruction" )` then output of `<?go there?>` will be `{"$instruction":{"go":"there"}}` *(in compact form)* |
-| `attributes_key`     | `"attributes"` or `"_attributes"` | Name of the property key which will be used for the attributes. For example, if `# ( "attributes_key" ; "$attributes" )` then output of `<a x="hello"/>` will be `{"a":{$attributes:{"x":"hello"}}}` *(in compact form)* |
-| `comment_key`        | `"comment"` or `"_comment"` | Name of the property key which will be used for the comment. For example, if `# ( "comment_key" ; "$comment" )` then output of `<!--note-->` will be `{"$comment":"note"}` *(in compact form)* |
-| `cdata_key`          | `"cdata"` or `"_cdata"` | Name of the property key which will be used for the cdata. For example, if `# ( "cdata_key" ; "$cdata" )` then output of `<![CDATA[1 is < 2]]>` will be `{"$cdata":"1 is < 2"}` *(in compact form)* |
-| `doctype_key`        | `"doctype"` or `"_doctype"` | Name of the property key which will be used for the doctype. For example, if `# ( "doctype_key" ; "$doctype" )` then output of `<!DOCTYPE foo>` will be `{"$doctype":" foo}` *(in compact form)* |
-| `text_key`           | `"text"` or `"_text"` | Name of the property key which will be used for the text. For example, if `# ( "text_key" ; "$text" )` then output of `<a>hi</a>` will be `{"a":{"$text":"Hi"}}` *(in compact form)* |
+```javascript
+fmUri ( "http://user:pass@example.org/foo/hello.html" ; "username" ) // returns "user"
+```
 
-Two default values mean the first is used for *non-compact* output and the second is for *compact* output.
+#### password
 
-> **TIP**: In compact mode, you can further reduce output result by using fewer characters for key names `# ( "text_key" ; "_" ) & # ( "attributes_key" ; "$" ) & # ( "comment_key" ; "value" )`. This is also applicable to non-compact mode.
+```javascript
+fmUri ( "http://user:pass@example.org/foo/hello.html" ; "password" ) // returns "pass"
+```
 
-> **TIP**: In non-compact mode, you probably want to set `# ( "text_key" ; "value" ) & # ( "cdata_key" ; "value" ) & # ( "comment_key" ; "value" )` 
-> to make it more consistent and easier for your client code to go through the contents of text, cdata, and comment.
+#### hostname
 
-The below parameters are under consideration but currently **NOT** in the script.
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "hostname" ) // returns "example.org"
+```
 
-| `name`              | Default `value` | Description |
-|:--------------------|:----------------|:------------|
-| `parent_key`         | `"parent"` or `"_parent"` | Name of the property key which will be used for the parent. For example, if `# ( "parent_key" ; "$parent" )` then output of `<a></b></a>` will be `{"a":{"b":{$parent:_points_to_a}}}` *(in compact form)* |
-| `type_key`           | `"type"` | Name of the property key which will be used for the type. For example, if `# ( "type_key" ; "$type" )` then output of `<a></a>` will be `{"elements":[{"$type":"element","name":"a"}]}` *(in non-compact form)* |
-| `name_key`           | `"name"` | Name of the property key which will be used for the name. For example, if `# ( "name_key" ; "$name" )` then output of `<a></a>` will be `{"elements":[{"type":"element","$name":"a"}]}` *(in non-compact form)* |
-| `elements_key`       | `"elements"` | Name of the property key which will be used for the elements. For example, if `# ( "elements_key" ; "$elements" )` then output of `<a></a>` will be `{"$elements":[{"type":"element","name":"a"}]}` *(in non-compact form)* |
+#### port
+
+```javascript
+fmUri ( "http://example.org:8080/foo/hello.html" ; "hostname" ) // returns "8080"
+```
+
+#### host
+
+```javascript
+fmUri ( "http://example.org:80/foo/hello.html" ; "host" ) // returns "example.org:80"
+```
+
+#### userinfo
+
+Userinfo is comprised of username and password
+
+```javascript
+fmUri ( "http://user:pass@example.org:88/foo/hello.html" ; "userinfo" ) // returns "user:pass"
+```
+
+#### authority
+
+Authority is comprised of username, password, hostname and port
+
+```javascript
+fmUri ( "http://user:pass@example.org:88/foo/hello.html" ; "authority" ) // returns "user:pass@example.org:88"
+```
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -245,11 +224,13 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
+
 ## Contact
 
 Steven McGill - [WhiteSpace Systems Ltd](https://whitespacesystems.co.uk) - [steven@whitespacesystems.co.uk](mailto:steven@whitespacesystems.co.uk)
@@ -257,32 +238,16 @@ Steven McGill - [WhiteSpace Systems Ltd](https://whitespacesystems.co.uk) - [ste
 Project Link: [fm-xml2json](https://github.com/stevenwhitespacesystems/fm-uri)
 
 <!-- ACKNOWLEDGEMENTS -->
+
 ## Acknowledgements
-* [Jeremy Bante's #Parameters](http://www.modularfilemaker.org/module/parameters/)
-* [Inspired by xml-js](https://github.com/nashwaan/xml-js)
-* [Computech IT Services](https://www.computech-it.co.uk)
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
-<!-- FMAPI SUITE -->
-## fmapi Product Suite
-
-When FileMaker 16 introduced cURL with the Insert from URL script step. Use cases for FileMaker Pro increased dramatically in relation to REST APIs.
-
-It allowed developers to finally communicate with other web services and APIs without the need for 3rd party plugins. Integration with Couriers, Payment Gateways & Social Media Sites all became within touching distance.
-
-However, without prior knowledge of cURL, HTTP Request Methods, HTTP Headers, JSON, OAuth Authentication, API Keys, API documentation etc, it can be extremely difficult to get started for the novice user or even the most proficient FileMaker developer.
-
-And with that comes our goal, to simplify communications between your FileMaker App and the vast amount of Web Services available, no matter your ability level.
-
-Read more over at [What is fmapi?](https://whitespacesystems.co.uk/filemaker-3rd-party-api-integration/)
-
-### fmapi Apps
-
-A collection of FileMaker apps that communicate directly with popular 3rd party REST APIs.
-
-* [fmapi-vies-vat](https://whitespacesystems.co.uk/portfolio-item/filemaker-vies-vat-integration/) - Integrate the EU Commissions Vies VAT API directly into you FileMaker App allowing you to validate EU VAT Numbers.
+- [Jeremy Bante's #Parameters](http://www.modularfilemaker.org/module/parameters/)
+- [Inspired by xml-js](https://github.com/nashwaan/xml-js)
+- [Computech IT Services](https://www.computech-it.co.uk)
+- [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [filemaker-shield]: https://img.shields.io/badge/filemaker-%3E%3D%2016.0.0-009edb.svg
 [platform-shield]: https://img.shields.io/badge/platform-Pro%20%7C%20Go%20%7C%20Server%20%7C%20Webdirect%20%7C%20Cloud-purple.svg
 [contributors-shield]: https://img.shields.io/github/contributors/stevenwhitespacesystems/fm-uri.svg
@@ -293,5 +258,3 @@ A collection of FileMaker apps that communicate directly with popular 3rd party 
 [linkedin-url]: https://www.linkedin.com/company/whitespace-systems-ltd/
 [facebook-shield]: https://img.shields.io/badge/-facebook-white.svg?logo=facebook&colorB=3578E5
 [facebook-url]: https://www.facebook.com/WhitespaceSystemsLtd/
-
-<!-- 168 -->
