@@ -63,44 +63,29 @@ We found more and more need for a function like this as we expose Claris/FileMak
 <!-- FEATURES -->
 ## Features
 
-* **Maintain Order of Elements**:
-Most parsers will convert `<a/><b/><a/>` to `{a:[{},{}],b:{}}` which merges any node of same name into an array. This script can create the following to preserve the order of elements:
-`{"elements":[{"type":"element","name":"a"},{"type":"element","name":"b"},{"type":"element","name":"a"}]}`.
+* **TODO**:
 
-Read also [Compact vs Non-Compact](###compact-vs-non-compact) for more info.
+<pre class="ascii-art">              <a href="docs.html#accessors-origin">origin</a>
+<span class="line">       __________|__________
+      /                     \
+</span>                         <a href="docs.html#accessors-authority">authority</a>
+<span class="line">     |             __________|_________
+     |            /                    \
+</span>              <a href="docs.html#accessors-userinfo">userinfo</a>                <a href="docs.html#accessors-host">host</a>                          <a href="docs.html#accessors-resource">resource</a>
+<span class="line">     |         __|___                ___|___                 __________|___________
+     |        /      \              /       \               /                      \
+</span>         <a href="docs.html#accessors-username">username</a>  <a href="docs.html#accessors-password">password</a>     <a href="docs.html#accessors-hostname">hostname</a>    <a href="docs.html#accessors-port">port</a>     <a href="docs.html#accessors-pathname">path</a> &amp; <a href="docs.html#accessors-segment">segment</a>      <a href="docs.html#accessors-search">query</a>   <a href="docs.html#accessors-hash">fragment</a>
+<span class="line">     |     __|___   __|__    ______|______   |   __________|_________   ____|____   |
+     |    /      \ /     \  /             \ / \ /                    \ /         \ / \
+</span>    foo://username:password@www.example.com:123/hello/world/there.html?name=ferret#foo
+<span class="line">    \_/                     \ / \       \ /    \__________/ \     \__/
+     |                       |   \       |           |       \      |
+</span>  <a href="docs.html#accessors-protocol">scheme</a>               <a href="docs.html#accessors-subdomain">subdomain</a>  <span class="line">\</span>     <a href="docs.html#accessors-tld">tld</a>      <a href="docs.html#accessors-directory">directory</a>    <span class="line">\</span>   <a href="docs.html#accessors-suffix">suffix</a>
+<span class="line">                                   \____/                      \___/
+                                      |                          |
+</span>                                    <a href="docs.html#accessors-domain">domain</a>                   <a href="docs.html#accessors-filename">filename</a>
 
-* **Fully XML Compliant**:
-Can parse: elements, attributes, texts, comments, CDATA, DOCTYPE, XML declarations, and Processing Instructions.
-
-* **Minimal Dependencies**:
-This script depends only on 2 custom functions and no plugins.
-
-* **Change Property Key Name**:
-Usually output of XML attributes are stored in `@attr`, `_atrr`, `$attr` or `$` in order to avoid conflicting with name of sub-elements.
-This library store them in `attributes`, but most importantly, you can change this to whatever you like.
-
-### Compact vs Non-Compact
-
-Most XML to JSON converters (including online converters) convert `<a/>` to some compact output like `{"a":{}}`
-instead of non-compact output like `{"elements":[{"type":"element","name":"a"}]}`.
-
-While compact output might work in most situations, there are cases when elements of different names are mixed inside a parent element. Lets use `<a x="1"/><b x="2"/><a x="3"/>` as an example.
-Most converters will produce compact output like this `{a:[{_:{x:"1"}},{_:{x:"3"}}], b:{_:{x:"2"}}}`,
-which has merged both `<a>` elements into an array. If you try to convert this back to xml, you will get `<a x="1"/><a x="3"/><b x="2"/>`
-which has not preserved the order of elements!
-
-The reason behind this behavior is due to the inherent limitation in the compact representation. 
-Because output like `{a:{_:{x:"1"}}, b:{_:{x:"2"}}, a:{_:{x:"3"}}}` is illegal (same property name `a` should not appear twice in an object). This leaves no option but to use array `{a:[{_:{x:"1"}},{_:{x:"3"}}]`.
-
-The non-compact output, which is supported by this script, will produce more information and always guarantees the order of the elements as they appeared in the XML file.
-
-Another drawback of compact output is the resultant element can be an object or an array and therefore makes the client code a little awkward in terms of the extra check needed on object type before processing.
-
-NOTE: Although non-compact output is more accurate representation of original XML than compact version, the non-compact version is verbose and consumes more space.
-This script provides both options. Use `# ( "compact": False )` if you are not sure because it preserves everything;
-otherwise use `# ( "compact": True )` if you want to save space and you don't care about mixing elements of same name and losing their order.
-
-Tip: You can reduce the output size by using shorter [key names](#options-for-changing-key-names).
+</pre>
 
 <!-- GETTING STARTED -->
 ## Getting Started
