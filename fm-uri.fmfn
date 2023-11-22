@@ -1,3 +1,14 @@
+/**
+ * fm-uri ( url ; key )
+ *
+ * @author Steven McGill <steven@whitespacesystems.co.uk>
+ * @param  string  url    The url you want to break up
+ * @param  string  key    The url part you want to return
+ * 
+ * @return string|object  Can either be a string or JSON object when key = all
+ *
+*/
+
 Let ([
   // Validation of keys
   _validKeys = List (
