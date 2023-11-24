@@ -6,7 +6,7 @@
   <h1 align="center">fm-uri</h1>
 
   <p align="center">
-    A simple Claris/FileMaker Pro custom function that allows you to work efficiently with URLs.
+    Revolutionize Your Workflow: Unleash the Power of fm-uri, Your Ultimate Claris/FileMaker Pro Companion for Seamless URL Mastery!
     <br />
     <a href="https://github.com/stevenwhitespacesystems/fm-uri"><strong>Explore the docs »</strong></a>
     <br />
@@ -45,11 +45,6 @@
       <ul>
         <li>
           <a href="#prerequisites">Prerequisites</a>
-          <ul>
-            <li><a href="#version">Version</a></li>
-            <li><a href="#custom-functions">Custom Functions</a></li>
-            <li><a href="#limitations">Limitations</a></li>
-          </ul>
         </li>
       </ul>
     </li>
@@ -57,16 +52,12 @@
       <a href="#usage">Usage</a>
         <ul>
           <li><a href="#installation">Installation</a></li>
-          <li><a href="#quick-start">Quick Start</a></li>
-          <li><a href="#sample-conversions">Sample Conversions</a></li>
-          <li><a href="#parameters">Parameters</a></li>
         </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgements">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -74,9 +65,9 @@
 
 ## About The Project
 
-**fm-uri** is a small Claris/FileMaker custom function that takes a url, breaks it up into component parts and returns this to the user.
+Introducing fm-uri, a compact yet powerful custom function tailored for Claris/FileMaker users! This innovative function seamlessly dissects any URL, extracting its vital components and elegantly presents them to you.
 
-We found more and more need for a function like this as we expose Claris/FileMaker to AWS and REST API's in general.
+As the demand for bridging Claris/FileMaker with the expansive realms of AWS and REST APIs continues to grow, fm-uri emerges as the indispensable solution. Elevate your experience by effortlessly navigating and leveraging the intricate details of URLs with this essential tool. Streamline your workflow and embrace the synergy between Claris/FileMaker and the dynamic world of modern APIs. Uncover the potential of fm-uri as it empowers you to seamlessly integrate and unlock new possibilities in your endeavors.
 
 ### Built With
 
@@ -87,7 +78,13 @@ We found more and more need for a function like this as we expose Claris/FileMak
 
 ## Features
 
-- **Simple to use**: The custom function takes a url and a key and provides this part of the url for use.
+- **Effortless URL Parsing**: Seamlessly dissect any URL, effortlessly extracting its vital components for streamlined use.
+- **Intuitive Functionality**: A user-friendly custom function that takes a URL and a key, providing specific parts of the URL with simplicity and precision.
+- **Versatility without 3rd Party Dependencies**: Built exclusively for Claris Pro with no reliance on third-party plugins, ensuring reliability and independence.
+- **Modern JSON Function Integration**: Utilizes the power of JSON Functions introduced in FileMaker 16 for a modern and efficient user experience.
+- **Extensive Key Options**: Choose from a comprehensive list of keys to retrieve specific URL details, offering flexibility and customization.
+
+Elevate your Claris/FileMaker experience with fm-uri, where innovation meets practicality, and URL mastery becomes an integral part of your dynamic workflow.
 
 <!-- GETTING STARTED -->
 
@@ -95,13 +92,13 @@ We found more and more need for a function like this as we expose Claris/FileMak
 
 ### Prerequisites
 
-#### Version
+To make the most of fm-uri, ensure your Claris/FileMaker environment meets the following prerequisites:
 
-The Claris/FileMaker custom function makes use of the [JSON Functions](https://fmhelp.filemaker.com/help/16/fmp/en/index.html#page/FMP_Help/json-functions.html) introduced in FileMaker 16.
+- FileMaker Version: The custom function relies on the JSON Functions introduced in FileMaker 16. Therefore, it is compatible with FileMaker 16 and later versions.
 
-This means that this custom function will only work with **FileMaker 16+** products.
+*Note: Using this custom function with versions earlier than FileMaker 16 may result in unexpected behavior.*
 
-Using the custom function with anything less than 16 will have unexpected behaviour.
+With these prerequisites in place, you can seamlessly integrate fm-uri into your Claris/FileMaker workflow, unlocking its full potential for URL mastery.
 
 #### Limitations
 
@@ -115,47 +112,62 @@ TODO:
 
 ### Installation
 
-1. Copy the code from the [fm-uri.fmfn](https://raw.githubusercontent.com/stevenwhitespacesystems/fm-uri/main/fm-uri.fmfn) file directly into the custom function area of your Claris/FileMaker file.
+Integrating fm-uri into your Claris/FileMaker file is a breeze. Follow these simple steps:
 
-### Quick Start
+1. Open the fm-uri.fmfn file.
+2. Copy the code directly from the file.
+3. Paste the code into the custom function area of your Claris/FileMaker file.
 
-There is 1 fmp12 files provided here
-
-1. fm-uri.fmp12
-
-`fm-uri.fmp12` file contains the custom function and the test suite used to confirm the function behaves correctly.
-
-If you open the `fm-uri.fmp12` file, you can open up the Data Viewer and test the custom function straight away.
+That's it! You're ready to harness the power of fm-uri for seamless URL management.
 
 ### Understanding the different URL parts
 
 Below is a representation of how we break up the url
 
-<pre class="ascii-art">              <a href="docs.html#accessors-origin">origin</a>
+<pre class="ascii-art">              <a href="#origin">origin</a>
 <span class="line">       __________|__________
       /                     \
 </span>                         <a href="#authority">authority</a>
 <span class="line">     |             __________|_________
      |            /                    \
-</span>              <a href="#userinfo">userinfo</a>                <a href="#host">host</a>                          <a href="docs.html#accessors-resource">resource</a>
+</span>              <a href="#userinfo">userinfo</a>                <a href="#host">host</a>                          <a href="#resource">resource</a>
 <span class="line">     |         __|___                ___|___                 __________|___________
      |        /      \              /       \               /                      \
-</span>         <a href="#username">username</a>  <a href="#password">password</a>     <a href="#hostname">hostname</a>    <a href="#port">port</a>     <a href="docs.html#accessors-pathname">path</a> &amp; <a href="docs.html#accessors-segment">segment</a>      <a href="docs.html#accessors-search">query</a>   <a href="docs.html#accessors-hash">fragment</a>
+</span>         <a href="#username">username</a>  <a href="#password">password</a>     <a href="#hostname">hostname</a>    <a href="#port">port</a>     <a href="#pathname">path</a> &amp; <a href="#segment">segment</a>      <a href="#search">query</a>   <a href="#hash">fragment</a>
 <span class="line">     |     __|___   __|__    ______|______   |   __________|_________   ____|____   |
      |    /      \ /     \  /             \ / \ /                    \ /         \ / \
 </span>    foo://username:password@www.example.com:123/hello/world/there.html?name=ferret#foo
 <span class="line">    \_/                     \ / \       \ /    \__________/ \     \__/
      |                       |   \       |           |       \      |
-</span>  <a href="#scheme">scheme</a>               <a href="docs.html#accessors-subdomain">subdomain</a>  <span class="line">\</span>     <a href="docs.html#accessors-tld">tld</a>      <a href="docs.html#accessors-directory">directory</a>    <span class="line">\</span>   <a href="docs.html#accessors-suffix">suffix</a>
+</span>  <a href="#scheme">scheme</a>               <a href="#subdomain">subdomain</a>  <span class="line">\</span>     <a href="#tld">tld</a>      <a href="#directory">directory</a>    <span class="line">\</span>   <a href="#suffix">suffix</a>
 <span class="line">                                   \____/                      \___/
                                       |                          |
-</span>                                    <a href="docs.html#accessors-domain">domain</a>                   <a href="docs.html#accessors-filename">filename</a>
+</span>                                    <a href="#domain">domain</a>                   <a href="#filename">filename</a>
 
 </pre>
 
+### Function
+
+The function signature is straightforward and powerful:
+
+```javascript
+/**
+ * fm-uri ( url ; key )
+ *
+ * @author Steven McGill <steven@whitespacesystems.co.uk>
+ * @param  string  url    The url you want to break up
+ * @param  string  key    The url part you want to return
+ * 
+ * @return string|object  Can either be a string or JSON object when key = all
+ *
+*/
+
+fmUri ( url ; key );
+```
+
 ### Keys
 
-Here are the list of keys that can be used in the key property of the custom function.
+Tailor your URL extraction with a variety of keys available in the custom function:
 
 #### scheme
 > `protocol` can also be used and is an alias of `scheme`
@@ -197,7 +209,7 @@ fmUri ( "http://example.org:80/foo/hello.html" ; "host" ) // returns "example.or
 
 #### userinfo
 
-Userinfo is comprised of username and password
+> Userinfo is comprised of username and password
 
 ```javascript
 fmUri ( "http://user:pass@example.org:88/foo/hello.html" ; "userinfo" ) // returns "user:pass"
@@ -205,10 +217,125 @@ fmUri ( "http://user:pass@example.org:88/foo/hello.html" ; "userinfo" ) // retur
 
 #### authority
 
-Authority is comprised of username, password, hostname and port
+> Authority is comprised of username, password, hostname and port
 
 ```javascript
 fmUri ( "http://user:pass@example.org:88/foo/hello.html" ; "authority" ) // returns "user:pass@example.org:88"
+```
+
+#### origin
+
+> Origin is comprised of the scheme and authority.
+
+```javascript
+fmUri ( "http://example.com/foo.html?q=hello" ; "origin" ) // returns "http://example.com"
+```
+
+#### domain
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "domain" ) // returns "example.org"
+```
+
+#### subdomain
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "subdomain" ) // returns "example.org"
+```
+
+#### tld
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "tld" ) // returns "org"
+```
+
+#### pathname
+> `path` can also be used and is an alias of `pathname`
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "pathname" ) // returns "/foo/hello.html"
+fmUri ( "http://example.org/foo/hello.html" ; "path" ) // returns "/foo/hello.html"
+```
+
+#### directory
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "directory" ) // returns "/foo" (no trailing slash)
+```
+
+#### filename
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "filename" ) // returns "hello.html" (no leading slash)
+```
+
+#### suffix
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html" ; "suffix" ) // returns "html" (no leading dot)
+```
+
+#### search
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html?foo=bar&bar=baz" ; "search" ) // returns "?foo=bar&bar=baz" (leading ?)
+```
+
+#### query
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html?foo=bar&bar=baz" ; "query" ) // returns "foo=bar&bar=baz" (no leading ?)
+```
+
+#### hash
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html#world" ; "hash" ) // returns "#world" (leading #)
+```
+
+#### fragment
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html#world" ; "fragment" ) // returns "world" (no leading #)
+```
+
+#### resource
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html?query=string#hash" ; "resource" ) // returns "/foo/hello.html?query=string#hash"
+```
+
+#### all
+
+```javascript
+fmUri ( "foo://username:password@www.example.com:123/hello/world/there.html?name=ferret#foo" ; "all" )
+/**
+ * returns
+ * {
+ *  "authority": "username:password@www.example.com:123",
+ *  "directory": "/hello/world",
+ *  "domain": "example.com",
+ *  "filename": "there.html",
+ *  "fragment": "foo",
+ *  "hash": "#foo",
+ *  "host": "www.example.com:123",
+ *  "hostname": "www.example.com",
+ *  "origin": "foo://username:password@www.example.com:123",
+ *  "password": "password",
+ *  "path": "/hello/world/there.html",
+ *  "pathname": "/hello/world/there.html",
+ *  "port": "123",
+ *  "protocol": "foo",
+ *  "query": "name=ferret",
+ *  "resource": "/hello/world/there.html?name=ferret#foo",
+ *  "scheme": "foo",
+ *  "search": "?name=ferret",
+ *  "subdomain": "www",
+ *  "suffix": "html",
+ *  "tld": "com",
+ *  "userinfo": "username:password",
+ *  "username": "username"
+ * }
+ * 
 ```
 
 <!-- CONTRIBUTING -->
@@ -235,16 +362,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Steven McGill - [WhiteSpace Systems Ltd](https://whitespacesystems.co.uk) - [steven@whitespacesystems.co.uk](mailto:steven@whitespacesystems.co.uk)
 
-Project Link: [fm-xml2json](https://github.com/stevenwhitespacesystems/fm-uri)
-
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
 
-- [Jeremy Bante's #Parameters](http://www.modularfilemaker.org/module/parameters/)
-- [Inspired by xml-js](https://github.com/nashwaan/xml-js)
-- [Computech IT Services](https://www.computech-it.co.uk)
-- [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+- [Medialize's URI.js](https://medialize.github.io/URI.js/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
