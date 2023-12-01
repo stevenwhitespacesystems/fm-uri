@@ -104,7 +104,20 @@ With these prerequisites in place, you can seamlessly integrate fm-uri into your
 
 ##### Query String
 
-TODO:
+This key `queryJson` currently doesn't handle query strings that try to encode array parameters.
+
+e.g
+
+```
+foo[]=1&foo[]=2
+```
+
+This will return a result of 
+```json
+{"foo[]":"1","foo[]":"2"}
+```
+
+The query string also doesn't encode integers. This means the `queryJson` key, will encode everything as `strings`.
 
 <!-- USAGE EXAMPLES -->
 
@@ -284,6 +297,12 @@ fmUri ( "http://example.org/foo/hello.html?foo=bar&bar=baz" ; "search" ) // retu
 
 ```javascript
 fmUri ( "http://example.org/foo/hello.html?foo=bar&bar=baz" ; "query" ) // returns "foo=bar&bar=baz" (no leading ?)
+```
+
+#### queryJson
+
+```javascript
+fmUri ( "http://example.org/foo/hello.html?foo=bar&bar=baz" ; "query" ) // returns "{"foo":"bar","bar":"baz"}"
 ```
 
 #### hash
