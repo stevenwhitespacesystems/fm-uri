@@ -1,5 +1,5 @@
 /**
- * fm-uri ( url ; key )
+ * fmUri ( url ; key )
  *
  * @author Steven McGill <steven@whitespacesystems.co.uk>
  * @param  string  url    The url you want to break up
