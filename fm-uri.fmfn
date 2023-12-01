@@ -32,6 +32,7 @@ Let ([
       "**filename**" ;
       "**suffix**" ;
       "**query**" ;
+      "**queryJson**" ;
       "**search**" ;
       "**fragment**" ;
       "**hash**" ;
@@ -86,6 +87,7 @@ Let ([
   _list = Substitute ( _rest ; "?" ; "¶" ) ;
   _rest = GetValue ( _list ; 1 ) ;
   _query = Case ( _hasQuery ; GetValue ( _list ; 2 ) ; "" ) ;
+  _queryJson = Case ( _hasQuery ; "{\"" & Substitute ( _query ; [ "&" ; "\",\"" ], [ "=" ; "\":\"" ] ) & "\"}" ; "" ) ;
 
   // pathname
   _pathname = "/" & _rest ;
@@ -126,6 +128,7 @@ Let ([
     [ "filename" ; _filename ; JSONString ] ;
     [ "suffix" ; _suffix ; JSONString ] ;
     [ "query" ; _query ; JSONString ] ;
+    [ "queryJson" ; _queryJson ; JSONString ] ;
     [ "search" ; "?" & _query ; JSONString ] ;
     [ "fragment" ; _fragment ; JSONString ] ;
     [ "hash" ; "#" & _fragment ; JSONString ]
