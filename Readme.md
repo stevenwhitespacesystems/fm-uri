@@ -102,22 +102,21 @@ With these prerequisites in place, you can seamlessly integrate fm-uri into your
 
 #### Limitations
 
-##### Query String
+##### Query String Handling
 
-This key `queryJson` currently doesn't handle query strings that try to encode array parameters.
-
-e.g
+The `queryJson` key currently has limitations in handling certain types of query strings, specifically those attempting to encode array parameters. For example:
 
 ```
 foo[]=1&foo[]=2
 ```
 
-This will return a result of 
+The result will be:
+
 ```json
 {"foo[]":"1","foo[]":"2"}
 ```
 
-The query string also doesn't encode integers. This means the `queryJson` key, will encode everything as `strings`.
+Additionally, the `queryJson` key does not encode integers, resulting in all values being encoded as strings.
 
 <!-- USAGE EXAMPLES -->
 
